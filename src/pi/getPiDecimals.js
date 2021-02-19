@@ -12,7 +12,7 @@ const DECIMALS_PER_FILE = 10000000;
  * @returns {Array} an array with the numbers of the files to open
  */
 const getFilesToOpen = (start, length) => {
-
+    return [1];
 }
 
 /**
