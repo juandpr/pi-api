@@ -12,19 +12,7 @@ const DECIMALS_PER_FILE = 10000000;
  * @returns {Array} an array with the numbers of the files to open
  */
 const getFilesToOpen = (start, length) => {
-    return [1];
-}
-
-/**
- * Starting from "number", returns "length" amount of decimals of the digit Pi.
- * @param {number} start
- * @param {number} length
- *
- * @returns {Promise} a promise that resolves with the decimals.
- */
-const getPiDecimals = (start, length) => {
-    /* First we determine which files to open */
-    /**
+     /**
      * Each file has 10.000.000 (ten million) decimals
      * If the start is < 10.000.000 then we need to open the first file
      * If the start is > 10.000.000 then we need to open the int value of ((start / 10.000.000) + 1) file
@@ -37,6 +25,40 @@ const getPiDecimals = (start, length) => {
      * length = 3.000.000
      * rest + 3.000.000 = 10.500.000 then we open the second file
      */
+    const firstFile = Math.floor((start / DECIMALS_PER_FILE)) + 1;
+    const rest = start % DECIMALS_PER_FILE;
+    let files = [];
+
+    let used = (start + length <= DECIMALS_PER_FILE)
+        ? length
+        : DECIMALS_PER_FILE - rest;
+
+    let currentFile = firstFile;
+
+    files.push(currentFile);
+
+    while(used < length) {
+        used += (length - used) > DECIMALS_PER_FILE
+            ? DECIMALS_PER_FILE
+            : (length - used);
+
+        currentFile++
+        files.push(currentFile);
+    }
+
+    return files;
+}
+
+/**
+ * Starting from "number", returns "length" amount of decimals of the digit Pi.
+ * @param {number} start
+ * @param {number} length
+ *
+ * @returns {Promise} a promise that resolves with the decimals.
+ */
+const getPiDecimals = (start, length) => {
+    /* First we determine which files to open */
+    const filesToOpen = getFilesToOpen(start, lenght);
 
     /* Then we open them and iterate through the decimals */
     /**
