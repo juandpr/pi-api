@@ -4,7 +4,13 @@ const piController = require('../src/pi');
 
 /* GET pi decimals */
 router.get('/', (req, res, next) => {
-  res.json({decimals: piController.getPiDecimals(1, 2)});
+  piController.getPiDecimals()
+  .then((decimals) =>{
+    res.json({decimals});
+  })
+  .catch((err) => {
+    throw new Error(err);
+  });
 });
 
 module.exports = router;

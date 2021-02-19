@@ -1,3 +1,14 @@
+const fs = require('fs');
+const path = require('path');
+const fsPromises = fs.promises;
+
+/**
+ * Starting from "number", returns "length" amount of decimals of the digit Pi.
+ * @param {number} start
+ * @param {number} length
+ *
+ * @returns {Promise} a promise that resolves with the decimals.
+ */
 const getPiDecimals = (start, length) => {
     /* First we determine which files to open */
     /**
@@ -31,7 +42,13 @@ const getPiDecimals = (start, length) => {
      */
 
     /* Then we return the decimals */
-    return '14159265';
+    const fileName = path.join(__dirname, '../../public/pi/pi1');
+
+    return fsPromises.readFile(fileName, {
+        encoding: 'utf8'
+    }).then((data) => {
+        return data.substring(0, 2764800);
+    });
 };
 
 module.exports = getPiDecimals;
