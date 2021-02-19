@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const fsPromises = fs.promises;
 
-const DECIMALS_PER_FILE = 10000000;
-const FILE_PREFIX = '../../public/pi/pi';
+/* we are using LET so we can override in tests */
+let DECIMALS_PER_FILE = 10000000;
+let FILE_PREFIX = '../../public/pi/pi';
 
 /**
  * Gets the files that we need to open in order to retrieve the decimals from start to length
