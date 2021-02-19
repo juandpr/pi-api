@@ -1,5 +1,13 @@
 const rewire = require('rewire');
 const getPiDecimalsModule = rewire('./getPiDecimals');
+const getPiDecimals = require('./getPiDecimals');
+
+jest.mock('./constants', () => {
+    return {
+        DECIMALS_PER_FILE: 10,
+        FILE_PREFIX: '../../public/mocks/pi'
+    }
+});
 
 describe('getPiDecimals File', () => {
     const testCasesFilesToOpen = [
@@ -109,10 +117,6 @@ describe('getPiDecimals File', () => {
 
     describe.each(testCasesGetPiDecimals)('getPiDecimals method', ({id, start, length, result}) => {
         it(`With start = ${start} and length = ${length}`, () => {
-            const getPiDecimals = getPiDecimalsModule.__get__('getPiDecimals');
-            getPiDecimalsModule.__set__('DECIMALS_PER_FILE', 10);
-            getPiDecimalsModule.__set__('FILE_PREFIX', '../../public/mocks/pi');
-
             return getPiDecimals(start, length).then((decimals) => {
                 expect(decimals).toEqual(result);
             });

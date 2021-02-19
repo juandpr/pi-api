@@ -37,11 +37,12 @@ app.use(function(err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.json({error: 'Something wrong happened!'});
 
     if (isDevEnv) {
-      res.json({error: err.message});
-      console.error(err);
+        console.error(err);
+        res.json({error: err.message});
+    } else {
+        res.json({error: 'Something wrong happened!'});
     }
 });
 

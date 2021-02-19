@@ -1,0 +1,11 @@
+const DECIMALS_PER_FILE = 10000000;
+const FILE_PREFIX = '../../public/pi/pi';
+const MAX_NUMBER_OF_DECIMALS = 1000000000;
+const MAX_LENGTH = 3000000;
+
+module.exports = {
+    DECIMALS_PER_FILE,
+    FILE_PREFIX,
+    MAX_NUMBER_OF_DECIMALS,
+    MAX_LENGTH
+};
