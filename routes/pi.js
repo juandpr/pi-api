@@ -4,8 +4,8 @@ const piController = require('../src/pi');
 
 /* GET pi decimals */
 router.get('/', (req, res, next) => {
-  piController.getPiDecimals()
-  .then((decimals) =>{
+  piController.getPiDecimals(5, 12)
+  .then((decimals) => {
     res.json({decimals});
   })
   .catch((err) => {
