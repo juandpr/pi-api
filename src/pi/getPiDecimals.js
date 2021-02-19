@@ -2,6 +2,19 @@ const fs = require('fs');
 const path = require('path');
 const fsPromises = fs.promises;
 
+const DECIMALS_PER_FILE = 10000000;
+
+/**
+ * Gets the files that we need to open in order to retrieve the decimals from start to length
+ * @param {number} start
+ * @param {number} length
+ *
+ * @returns {Array} an array with the numbers of the files to open
+ */
+const getFilesToOpen = (start, length) => {
+
+}
+
 /**
  * Starting from "number", returns "length" amount of decimals of the digit Pi.
  * @param {number} start
