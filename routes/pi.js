@@ -4,7 +4,6 @@ const router = express.Router();
 const piController = require('../src/pi');
 const { MAX_NUMBER_OF_DECIMALS, MAX_LENGTH } = require('../src/pi/constants');
 
-/* GET pi decimals */
 router.get('/', (req, res, next) => {
     const start = parseInt(req.query.start) || 0;
     const length = parseInt(req.query.length) || 8;
@@ -15,6 +14,14 @@ router.get('/', (req, res, next) => {
 
     if (length > MAX_LENGTH) {
         return next(createError(400, `You can request a maximum of: ${MAX_LENGTH} decimals.`));
+    }
+
+    if (start < 0) {
+        return next(createError(400, `start should be greater or equal than zero.`));
+    }
+
+    if (length < 0) {
+        return next(createError(400, `length should be greater or equal than zero.`));
     }
 
     piController.getPiDecimals(start, length)
